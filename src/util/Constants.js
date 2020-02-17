@@ -66,9 +66,9 @@ exports.DefaultOptions = {
     large_threshold: 250,
     compress: false,
     properties: {
-      $os: browser ? 'browser' : process.platform,
-      $browser: 'discord.js',
-      $device: 'discord.js',
+      $os: browser ? navigator.platform : process.platform,
+      $browser: browser ? navigator.userAgent : 'node.js',
+      $device: 'jangle.js JavaScript',
     },
     version: 6,
   },
@@ -83,14 +83,14 @@ exports.DefaultOptions = {
    */
   http: {
     version: 7,
-    api: 'https://discordapp.com/api',
-    cdn: 'https://cdn.discordapp.com',
-    invite: 'https://discord.gg',
+    api: window.JANGLEAPI || 'https://api.jangleapp.com/api',
+    cdn: window.JANGLECDN || 'https://cdn.jangleapp.com',
+    invite: window.JANGLEINVITE || 'https://jangle.pw',
   },
 };
 
 exports.UserAgent = browser ? null :
-  `DiscordBot (${Package.homepage.split('#')[0]}, ${Package.version}) Node.js/${process.version}`;
+  `Jangle.js (${Package.homepage.split('#')[0]}, ${Package.version}) Node.js/${process.version}`;
 
 exports.WSCodes = {
   1000: 'WS_CLOSE_REQUESTED',
@@ -99,8 +99,10 @@ exports.WSCodes = {
   4011: 'SHARDING_REQUIRED',
 };
 
+// IMPORTANT NOTE: Jangle does not support webp (and probably won't until Safari/WebKit does)
+
 const AllowedImageFormats = [
-  'webp',
+//  'webp',
   'png',
   'jpg',
   'gif',
@@ -108,7 +110,7 @@ const AllowedImageFormats = [
 
 const AllowedImageSizes = Array.from({ length: 8 }, (e, i) => 2 ** (i + 4));
 
-function makeImageUrl(root, { format = 'webp', size } = {}) {
+function makeImageUrl(root, { format = 'png', size } = {}) {
   if (format && !AllowedImageFormats.includes(format)) throw new Error('IMAGE_FORMAT', format);
   if (size && !AllowedImageSizes.includes(size)) throw new RangeError('IMAGE_SIZE', size);
   return `${root}.${format}${size ? `?size=${size}` : ''}`;
@@ -129,25 +131,25 @@ exports.Endpoints = {
       Emoji: (emojiID, format = 'png') => `${root}/emojis/${emojiID}.${format}`,
       Asset: name => `${root}/assets/${name}`,
       DefaultAvatar: discriminator => `${root}/embed/avatars/${discriminator}.png`,
-      Avatar: (userID, hash, format = 'webp', size, dynamic = false) => {
+      Avatar: (userID, hash, format = 'png', size, dynamic = false) => {
         if (dynamic) format = hash.startsWith('a_') ? 'gif' : format;
         return makeImageUrl(`${root}/avatars/${userID}/${hash}`, { format, size });
       },
-      Banner: (guildID, hash, format = 'webp', size) =>
+      Banner: (guildID, hash, format = 'png', size) =>
         makeImageUrl(`${root}/banners/${guildID}/${hash}`, { format, size }),
-      Icon: (guildID, hash, format = 'webp', size, dynamic = false) => {
+      Icon: (guildID, hash, format = 'png', size, dynamic = false) => {
         if (dynamic) format = hash.startsWith('a_') ? 'gif' : format;
         return makeImageUrl(`${root}/icons/${guildID}/${hash}`, { format, size });
       },
-      AppIcon: (clientID, hash, { format = 'webp', size } = {}) =>
+      AppIcon: (clientID, hash, { format = 'png', size } = {}) =>
         makeImageUrl(`${root}/app-icons/${clientID}/${hash}`, { size, format }),
-      AppAsset: (clientID, hash, { format = 'webp', size } = {}) =>
+      AppAsset: (clientID, hash, { format = 'png', size } = {}) =>
         makeImageUrl(`${root}/app-assets/${clientID}/${hash}`, { size, format }),
-      GDMIcon: (channelID, hash, format = 'webp', size) =>
+      GDMIcon: (channelID, hash, format = 'png', size) =>
         makeImageUrl(`${root}/channel-icons/${channelID}/${hash}`, { size, format }),
-      Splash: (guildID, hash, format = 'webp', size) =>
+      Splash: (guildID, hash, format = 'png', size) =>
         makeImageUrl(`${root}/splashes/${guildID}/${hash}`, { size, format }),
-      TeamIcon: (teamID, hash, { format = 'webp', size } = {}) =>
+      TeamIcon: (teamID, hash, { format = 'png', size } = {}) =>
         makeImageUrl(`${root}/team-icons/${teamID}/${hash}`, { size, format }),
     };
   },

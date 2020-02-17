@@ -1,7 +1,7 @@
 {
-  "name": "discord.js",
+  "name": "jangle.js",
   "version": "12.0.0-dev",
-  "description": "A powerful library for interacting with the Discord API",
+  "description": "A powerful library for interacting with the Jangle API, forked from discord.js",
   "main": "./src/index",
   "types": "./typings/index.d.ts",
   "scripts": {
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/discordjs/discord.js.git"
+    "url": "git+https://github.com/jangleapp/jangle.js.git"
   },
   "keywords": [
     "discord",
@@ -26,7 +26,7 @@
     "node",
     "discordapp"
   ],
-  "author": "Amish Shah <amishshah.2k@gmail.com>",
+  "author": "Ronsor Labs <ronsor@ronsor.com>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/discordjs/discord.js/issues"
