@@ -36,6 +36,7 @@
     "long": "^4.0.0",
     "prism-media": "^0.0.4",
     "snekfetch": "^3.6.4",
+    "superagent": "^5.2.2",
     "tweetnacl": "^1.0.0",
     "ws": "^6.0.0"
   },

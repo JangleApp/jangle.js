@@ -78,8 +78,8 @@ exports.DefaultOptions = {
    */
   http: {
     version: 7,
-    host: 'https://discordapp.com',
-    cdn: 'https://cdn.discordapp.com',
+    host: (process?process.env.JANGLEAPI:window.JANGLEAPI)||'https://api.jangleapp.com',
+    cdn: (process?process.env.JANGLECDN:window.JANGLECDN)||'https://cdn.jangleapp.com',
   },
 };
 

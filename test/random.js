@@ -6,11 +6,13 @@ const fs = require('fs');
 
 console.time('magic');
 
-const client = new Discord.Client({ fetchAllMembers: true, apiRequestMethod: 'sequential' });
+const client = new Discord.Client({http: {version: process.env.APIVERSION||7}, fetchAllMembers: true, apiRequestMethod: 'sequential', _tokenType: 'Bearer' });
 
-const { email, password, token, usertoken, song } = require('./auth.json');
+var { email, password, token, usertoken, song } = require('./auth.js');
 
-client.login(token).then(atoken => console.log('logged in with token ' + atoken)).catch(console.error);
+if (process.env.JANGLETOKEN) token = process.env.JANGLETOKEN;
+
+client.login(token).then(atoken => console.log('logged in')).catch(console.error);
 
 client.on('ready', () => {
   console.log(`ready with ${client.users.size} users`);
@@ -26,6 +28,7 @@ client.on('message', message => {
   if (true) {
     if (message.content === 'makechann') {
       if (message.channel.guild) {
+	console.log(message.channel.guild.createChannel);
         message.channel.guild.createChannel('hi', 'text').then(console.log);
       }
     }
@@ -61,7 +64,7 @@ client.on('message', message => {
     }
 
     if (message.content.startsWith('botname')) {
-      client.user.setUsername(message.content.substr(8));
+      client.user.setUsername(message.content.substr(8), "hello");
     }
 
     if (message.content.startsWith('botavatar')) {
@@ -152,6 +155,7 @@ client.on('message', msg => {
   }
 });
 
+/*
 const ytdl = require('ytdl-core');
 
 let disp, con;
@@ -178,7 +182,7 @@ client.on('message', msg => {
       })
       .catch(console.error);
   }
-});
+});*/
 
 client.on('messageReactionAdd', (reaction, user) => {
   if (reaction.message.channel.id !== '222086648706498562') return;
