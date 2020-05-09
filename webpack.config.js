@@ -20,7 +20,7 @@ const createConfig = options => {
     }),
   ];
 
-  const filename = `./webpack/discord${process.env.VERSIONED === 'false' ? '' : '.' + version}${options.mode === 'production' ? '.min' : ''}.js`; // eslint-disable-line
+  const filename = `./webpack/jangle${process.env.VERSIONED === 'false' ? '' : '.' + version}${options.mode === 'production' ? '.min' : ''}.js`; // eslint-disable-line
 
   return {
     entry: './browser.js',
