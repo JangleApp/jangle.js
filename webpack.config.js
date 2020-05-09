@@ -8,7 +8,7 @@ const version = require('./package.json').version;
 const prod = process.env.NODE_ENV === 'production';
 
 // eslint-disable-next-line max-len
-const filename = `discord${process.env.VERSIONED ? `.${version}` : ''}${prod ? '.min' : ''}.js`;
+const filename = `jangle${process.env.VERSIONED ? `.${version}` : ''}${prod ? '.min' : ''}.js`;
 
 module.exports = {
   entry: './src/index.js',
@@ -16,7 +16,7 @@ module.exports = {
   output: {
     path: path.resolve('./webpack'),
     filename,
-    library: 'Discord',
+    library: 'Jangle',
     libraryTarget: 'umd',
   },
   module: {
