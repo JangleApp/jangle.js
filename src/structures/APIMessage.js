@@ -95,7 +95,7 @@ class APIMessage {
     if (disableMentions === 'all') {
       content = Util.removeMentions(content || '');
     } else if (disableMentions === 'everyone') {
-      content = (content || '').replace(/@([^<>@ ]*)/gmsu, (match, target) => {
+      content = (content || '').replace(/@([^<>@ ]*)/gmu, (match, target) => {
         if (target.match(/^[&!]?\d+$/)) {
           return `@${target}`;
         } else {

@@ -3,7 +3,7 @@
 const Package = (exports.Package = require('../../package.json'));
 const { Error, RangeError } = require('../errors');
 const browser = (exports.browser = typeof window !== 'undefined');
-
+const getWindow = () => eval('window');
 /**
  * Options for a client.
  * @typedef {Object} ClientOptions
@@ -80,8 +80,14 @@ exports.DefaultOptions = {
    */
   http: {
     version: 7,
-    api: (process&&process.env?process.env.JANGLEAPP:window.JANGLEAPP)||'https://api.jangleapp.com',
-    cdn: (process&&process.env?process.env.JANGLECDN:window.JANGLECDN)||'https://cdn.jangleapp.com',
+    api:
+      (browser ? getWindow().JANGLEAPP : null) ||
+      (process && process.env ? process.env.JANGLEAPP : null) ||
+      'https://api.jangleapp.com',
+    cdn:
+      (browser ? getWindow().JANGLECDN : null) ||
+      (process && process.env ? process.env.JANGLECDN : null) ||
+      'https://cdn.jangleapp.com',
     invite: 'https://jangle.pw',
   },
 };

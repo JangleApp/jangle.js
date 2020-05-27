@@ -94,7 +94,7 @@ class Util {
    * @param {boolean} [options.inlineCodeContent=true] Whether to escape text inside inline code or not
    * @returns {string}
    */
-  static escapeMarkdown(
+  /*  static escapeMarkdown(
     text,
     {
       codeBlock = true,
@@ -149,32 +149,32 @@ class Util {
     if (strikethrough) text = Util.escapeStrikethrough(text);
     if (spoiler) text = Util.escapeSpoiler(text);
     return text;
-  }
+  }*/
 
   /**
    * Escapes code block markdown in a string.
    * @param {string} text Content to escape
    * @returns {string}
    */
-  static escapeCodeBlock(text) {
+  /* static escapeCodeBlock(text) {
     return text.replace(/```/g, '\\`\\`\\`');
-  }
+  }*/
 
   /**
    * Escapes inline code markdown in a string.
    * @param {string} text Content to escape
    * @returns {string}
    */
-  static escapeInlineCode(text) {
+  /* static escapeInlineCode(text) {
     return text.replace(/(?<=^|[^`])`(?=[^`]|$)/g, '\\`');
-  }
+  }*/
 
   /**
    * Escapes italic markdown in a string.
    * @param {string} text Content to escape
    * @returns {string}
    */
-  static escapeItalic(text) {
+  /* static escapeItalic(text) {
     let i = 0;
     text = text.replace(/(?<=^|[^*])\*([^*]|\*\*|$)/g, (_, match) => {
       if (match === '**') return ++i % 2 ? `\\*${match}` : `${match}\\*`;
@@ -185,42 +185,42 @@ class Util {
       if (match === '__') return ++i % 2 ? `\\_${match}` : `${match}\\_`;
       return `\\_${match}`;
     });
-  }
+  }*/
 
   /**
    * Escapes bold markdown in a string.
    * @param {string} text Content to escape
    * @returns {string}
    */
-  static escapeBold(text) {
+  /* static escapeBold(text) {
     let i = 0;
     return text.replace(/\*\*(\*)?/g, (_, match) => {
       if (match) return ++i % 2 ? `${match}\\*\\*` : `\\*\\*${match}`;
       return '\\*\\*';
     });
-  }
+  }*/
 
   /**
    * Escapes underline markdown in a string.
    * @param {string} text Content to escape
    * @returns {string}
    */
-  static escapeUnderline(text) {
+  /* static escapeUnderline(text) {
     let i = 0;
     return text.replace(/__(_)?/g, (_, match) => {
       if (match) return ++i % 2 ? `${match}\\_\\_` : `\\_\\_${match}`;
       return '\\_\\_';
     });
-  }
+  }*/
 
   /**
    * Escapes strikethrough markdown in a string.
    * @param {string} text Content to escape
    * @returns {string}
    */
-  static escapeStrikethrough(text) {
+  /* static escapeStrikethrough(text) {
     return text.replace(/~~/g, '\\~\\~');
-  }
+  }*/
 
   /**
    * Escapes spoiler markdown in a string.
@@ -556,7 +556,7 @@ class Util {
    */
   static cleanContent(str, message) {
     if (message.client.options.disableMentions === 'everyone') {
-      str = str.replace(/@([^<>@ ]*)/gmsu, (match, target) => {
+      str = str.replace(/@([^<>@ ]*)/gmu, (match, target) => {
         if (target.match(/^[&!]?\d+$/)) {
           return `@${target}`;
         } else {

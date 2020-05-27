@@ -1,7 +1,7 @@
 'use strict';
 
-const BaseCollection = require('@discordjs/collection');
 const Util = require('./Util');
+const BaseCollection = require('../../submod_collection');
 
 /**
  * A Map with additional utility methods. This is used throughout discord.js rather than Arrays for anything that has

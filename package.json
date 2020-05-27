@@ -36,7 +36,6 @@
   "runkitExampleFilename": "./docs/examples/ping.js",
   "unpkg": "./webpack/jangle.min.js",
   "dependencies": {
-    "@discordjs/collection": "^0.1.5",
     "abort-controller": "^3.0.0",
     "form-data": "^3.0.0",
     "node-fetch": "^2.6.0",
